@@ -1,0 +1,191 @@
+Java Reativo:
+
+https://www.youtube.com/playlist?list=PLqq-6Pq4lTTYPR2oH7kgElMYZhJd4vOGI
+
+Javeiros sao mimados por causa do springboot, a gente nao pensa que uma request pode ter 10310230123 de chamadas simultaneas.
+
+Ao fazer requests blocantes, pagamos com threads em idle e operações blocantes.
+
+-------------------------
+APIS nao blocantes (não muito boas):
+
+CompletableFuture/Future - Async:
+   ele faz a chamada e aguarda o resultado
+   Faz chamadas paralelas e quando elas tao prontos, elas sao mergeadas e retornam o objeto.
+   
+CompletionStage;
+
+-------------------------
+Reactive Programming:
+
+Simpler than the manual concurrent way;
+Few reusable flexible functions;
+Combine and reuse in powerful ways;
+Its a declarative code to build async processing pipelines;
+    Diferrent way of thinking about flow and data;
+    Integrated with java Flow interface;
+Not for simple project;
+Grows as your project grows;
+    
+-------------------------
+Collections streams:
+   focus on storage
+
+Java streams:
+   Sequence of data;
+   Focus on computations;
+   internal iteration;
+   
+   Stream operators:
+       map
+       filter
+       flatMap
+       findFirst
+       
+------------------------
+
+Iterator e observer patterns são relacionados há programação reativa
+
+------------------------
+Ele inscreve em um e dps pega o proximo
+
+class CustomBaseSubscriber<T> extends BaseSubscriber<T> {
+    public void hookOnSubscribe(Subscription subscription) {
+        System.out.println("Subcribed!");
+        request(1);
+    }
+
+    public void hookOnNext(T value) {
+        System.out.println("Processing :" + value.toString());
+        request(1);
+    }
+}
+
+
+------------------------
+
+.log() ( loga)
+
+List<Integer> numbers = ReactiveSources
+                .intNumbersFlux()
+                .log()
+                .toStream()
+                .toList();
+                
+                
+
+
+------------------------
+
+
+take() - pega os 3 primeiros
+
+
+ReactiveSources.intNumbersFlux()
+                .filter(e -> e > 5)
+                .log()
+                .take(3)
+                .map(e -> e * 10)
+                .subscribe(System.out::println);
+
+
+
+------------------------
+
+defaultIfEmpty()
+
+ReactiveSources.intNumbersFlux()
+                .filter(e -> e > 20)
+                .log()
+                .defaultIfEmpty(-1)
+                .subscribe(System.out::println);
+
+retorna -1 se vazio
+
+------------------------
+
+distinctUntilChanged()
+
+ReactiveSources.intNumbersFluxWithRepeat()
+                .distinctUntilChanged()
+                .subscribe(System.out::println);
+
+remove os iguais imediatos
+input: 1,1,1,2,3,4,4,1,1,5
+output:1,2,3,4,1,5
+
+
+------------------------
+
+ReactiveSources.intNumbersFluxWithRepeat()
+                .distinct()
+                .subscribe(System.out::println);
+
+pega os distintos
+
+------------------------
+
+doonerror()
+
+ReactiveSources.intNumbersFluxWithException()
+                .doOnError(e -> System.out.println("error: "+e.getMessage()))
+                .subscribe(num -> System.out.println(num));
+                
+mostra o erro mas para
+
+-------------------------
+
+continua mesmo se errando
+
+ReactiveSources.intNumbersFluxWithException()
+                .onErrorContinue((e,item) -> System.out.println("Erro: " + e.getMessage()))
+                .subscribe(num -> System.out.println(num));
+
+-------------------------
+onErrorResume()
+
+ReactiveSources.intNumbersFluxWithException()
+                .onErrorResume(err -> Flux.just(-1,-2))
+                .subscribe(num -> System.out.println(num));
+
+muda o valor para um novo flux
+
+-------------------------
+
+ReactiveSources.intNumbersFlux()
+                .count()
+                .subscribe(System.out::println);
+                
+conta os valores
+
+
+------------------------
+
+coleta todos os dados e retorna a lista
+
+ReactiveSources.intNumbersFlux()
+                .collectList()
+                .subscribe(System.out::println);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
