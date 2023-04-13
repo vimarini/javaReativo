@@ -169,6 +169,43 @@ ReactiveSources.intNumbersFlux()
 
 
 
+-------------------------
+
+Palestra sobre reatividade
+
+
+Por que usar?
+
+	Alta Disponibilidade;
+		2 Caminhos:
+			Escala Horizontal - Provisionar 		mais maquinas;
+			Escala Vertical - Otimizar;
+	Assincronicidade e código não blocante;
+	O reativo abstrai o baixo nível de codigos concorrentes e paralelos;
+
+Bibliotecas Reativas?
+
+	Reactive Streams Manifest
+	Hoje existem várias bibs
+	Foco no reactor nessa apresentação
+	
+O que é a programação reativa?
+
+	Data Streams
+		Tipos de informações passados
+			Dado
+			Erro
+			Completude (fim)
+	
+	Programação funcional?
+		Aplicando funções ao stream voce pode ir transformando ele.
+		(map,filter)
+	
+	Asynchronous Observers
+		Padrão Observer:
+			Publisher e Subscrbers
+			
+			
 
 
 
@@ -186,6 +223,4 @@ ReactiveSources.intNumbersFlux()
 
 
 
-
-
-
+cd doc	
