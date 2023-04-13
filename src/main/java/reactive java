@@ -205,7 +205,51 @@ O que é a programação reativa?
 		Padrão Observer:
 			Publisher e Subscrbers
 			
+
+	FlatMap
+		flateia as coisas
+		junta
+		voce passa um publisher como parametro
+		
+		numbersPublisher
+			.flatMap {number -> letterPublisher.map {letter -> letter + number}}
 			
+		ele vai juntas os dois
+
+
+WebFlux
+
+	O que é??
+	
+		Framework do spring construido numa stack reativa.
+		
+	MVC vs WebFlux
+		
+		MVC
+			Servlet API/Tomcat
+			Ecossistema do Spring
+			Modelo de concorrência (blocking/thread per request)
+			Paradigma Imperativo
+		
+		WebFlux
+			Servidor Netty
+			Ecossistema do Spring
+			Modelo de concorrencia (Async non-blocking/Event Loop)
+			Paradigma Reativo
+			
+	Por que??
+		Escalabilidade Vertical
+			Faz mais com menos recursos
+			Mais usuários simultâneos
+			
+		Paralelismo e assincronismo
+	
+	Como??
+		Modelos de concorrência
+			MVC
+				cada http é uma request e uma thread (Request per thread)
+			WebFlux
+				Varias reqs entram no Selector e utilizam worker thread (Event loop)
 
 
 
@@ -223,4 +267,6 @@ O que é a programação reativa?
 
 
 
-cd doc	
+
+
+
