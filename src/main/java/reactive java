@@ -252,7 +252,11 @@ WebFlux
 				Varias reqs entram no Selector e utilizam worker thread (Event loop)
 
 
+Pratica
 
+	zipwith()
+	junta chamadas
+	faz uma tupla
 
 
 
